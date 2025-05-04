@@ -13,7 +13,9 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git credentialsId: 'githubtoken-29april', url: 'https://github.com/Vikas0112/TestMVCJenkinsWithUnit-master.git'
+                git credentialsId: 'githubtoken-29april', 
+                git branch: 'main', url: 'https://github.com/Vikas0112/TestMVCJenkinsWithUnit-master.git'
+
             }
         }
 
