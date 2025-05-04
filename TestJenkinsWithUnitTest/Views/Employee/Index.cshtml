@@ -1,0 +1,39 @@
+﻿@model List<TestJenkinsWithUnit.Models.Employee>
+
+@{
+    ViewData["Title"] = "Employee List";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a href="@Url.Action("Create", "Employee")" class="btn btn-primary">Create New Employee</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Salary</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var emp in Model)
+        {
+            <tr>
+                <td>@emp.Name</td>
+                <td>@emp.Email</td>
+                <td>@emp.Department</td>
+                <td>@emp.Salary</td>
+                <td>
+                    <a href="@Url.Action("Details", "Employee", new { id = emp.Id })" class="btn btn-info">Details</a>
+                    <a href="@Url.Action("Edit", "Employee", new { id = emp.Id })" class="btn btn-warning">Edit</a>
+                    <a href="@Url.Action("Delete", "Employee", new { id = emp.Id })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

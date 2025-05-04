@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  jenkins:
+    build: .
+    image: testmvcjenkinswithunit:latest
+    container_name: container-testmvcjenkinswithunit
+    user: root
+    volumes:
+      # Persist Jenkins data in a named volume
+      - jenkins_home:/var/jenkins_home
+      # Mount host's Docker socket so Jenkins can run Docker commands
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Mount our local jenkins.yaml into the container
+      # So that Jenkins can read it at startup
+      - ./jenkins.yaml:/var/jenkins_home/JSAC/jenkins.yaml:ro
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    environment:
+      - CASC_JENKINS_CONFIG=/var/jenkins_home/JSAC/jenkins.yaml
+    restart: unless-stopped
+
+volumes:
+  jenkins_home:
+    driver: local
